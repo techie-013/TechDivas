@@ -1022,40 +1022,47 @@
             <div class="modal-body">
                 <p style="text-align: center;">Check how crowded your bus is before boarding</p>
                 
-                <div class="bus-layout">
-                    <div class="bus-driver">Driver</div>
-                    <div class="bus-seats">
-                        <div class="seat">1</div>
-                        <div class="seat occupied">2</div>
-                        <div class="seat">3</div>
-                        <div class="seat occupied">4</div>
-                        <div class="seat">5</div>
-                        <div class="seat occupied">6</div>
-                        <div class="seat">7</div>
-                        <div class="seat">8</div>
-                        <div class="seat occupied">9</div>
-                        <div class="seat">10</div>
-                        <div class="seat occupied">11</div>
-                        <div class="seat">12</div>
-                         <div class="seat">13</div>
-                        <div class="seat occupied">14</div>
-                        <div class="seat">15</div
-                        <div class="seat occupied">16</div>
-                        <div class="seat">17</div>
-                        <div class="seat occupied">18</div>
-                        <div class="seat">19</div>
-                        <div class="seat">20</div>
-                        <div class="seat occupied">21</div>
-                        <div class="seat">22</div>
-                        <div class="seat occupied">23</div>
-                        <div class="seat">24</div>
-                    </div>
-                    <div class="seat-info">
-                        <p><span style="display: inline-block; width: 15px; height: 15px; background: var(--success); border-radius: 3px;"></span> Available: 7 seats</p>
-                        <p><span style="display: inline-block; width: 15px; height: 15px; background: #e53e3e; border-radius: 3px;"></span> Occupied: 5 seats</p>
-                    </div>
-                </div>
-                
+               <div class="bus-layout">
+    <div class="bus-driver">Driver</div>
+    <div class="bus-seats">
+        <div class="seat">1</div>
+        <div class="seat occupied">2</div>
+        <div class="seat">3</div>
+        <div class="seat occupied">4</div>
+        <div class="seat">5</div>
+        <div class="seat occupied">6</div>
+        <div class="seat">7</div>
+        <div class="seat">8</div>
+        <div class="seat occupied">9</div>
+        <div class="seat">10</div>
+        <div class="seat occupied">11</div>
+        <div class="seat">12</div>
+        <div class="seat">13</div>
+        <div class="seat occupied">14</div>
+        <div class="seat">15</div> <!-- ✅ fixed closing tag -->
+        <div class="seat occupied">16</div>
+        <div class="seat">17</div>
+        <div class="seat occupied">18</div>
+        <div class="seat">19</div>
+        <div class="seat">20</div>
+        <div class="seat occupied">21</div>
+        <div class="seat">22</div>
+        <div class="seat occupied">23</div>
+        <div class="seat">24</div>
+    </div>
+
+    <div class="seat-info">
+        <p>
+            <span style="display: inline-block; width: 15px; height: 15px; background: var(--success); border-radius: 3px;"></span> 
+            Available: 12 seats
+        </p>
+        <p>
+            <span style="display: inline-block; width: 15px; height: 15px; background: #e53e3e; border-radius: 3px;"></span> 
+            Occupied: 12 seats
+        </p>
+    </div>
+</div>
+
                 <div style="background: #f8fafc; padding: 1.5rem; border-radius: 10px; margin-top: 2rem;">
                     <h3><i class="fas fa-chart-line"></i> Crowd Prediction</h3>
                     <p>Based on historical data and current bookings, this bus is expected to be:</p>
