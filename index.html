@@ -512,6 +512,84 @@
             margin-top: 1rem;
             text-align: center;
         }
+        /*Testimonial*/
+        
+        /* Testimonials Section */
+        .testimonials {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .testimonials:before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .testimonials:after {
+            content: '';
+            position: absolute;
+            bottom: -150px;
+            left: -150px;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .testimonial-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: var(--transition);
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .testimonial-text:before {
+            content: "";
+            position: absolute;
+            top: -20px;
+            left: -10px;
+            font-size: 4rem;
+            color: var(--gold);
+            opacity: 0.2;
+            font-family: Georgia, serif;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+
 
         /* Raahi Chatbot Styles */
         .raahi-chatbot {
@@ -1132,6 +1210,90 @@
             </div>
         </div>
     </div>
+    
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2>What Our Users Say</h2>
+                <p>Hear from people who are already using BlinkRide</p>
+            </div>
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "I used to wait 30 minutes every day for my bus. Now with BlinkRide, I know exactly when to leave my home. It's a game-changer for my daily commute!"
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">R</div>
+                        <div>
+                            <h4>Rahul Sharma</h4>
+                            <p>College Student, Hisar</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "The SOS feature gives me peace of mind when my daughter travels alone. I can see her journey in real-time and know she's safe."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">P</div>
+                        <div>
+                            <h4>Priya Mehta</h4>
+                            <p>Parent</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "The SMS service is brilliant! My father doesn't have a smartphone but can now check bus times easily. Thank you for making technology accessible to all."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">A</div>
+                        <div>
+                            <h4>Ankit Verma</h4>
+                            <p>Software Engineer</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "As a daily commuter, the crowd forecasting feature has saved me from many overcrowded buses. I can now plan my trip better and travel comfortably."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">S</div>
+                        <div>
+                            <h4>Sunita Patel</h4>
+                            <p>Office Manager</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "The multi-modal route planning is fantastic! I can now combine buses and autos for the most efficient journey, saving both time and money."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">R</div>
+                        <div>
+                            <h4>Rajiv Kumar</h4>
+                            <p>Sales Executive</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "BlinkRide has transformed how I travel in my small town. The real-time tracking works perfectly even in rural areas with limited connectivity."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">M</div>
+                        <div>
+                            <h4>Meena Devi</h4>
+                            <p>Teacher, Rural User</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Raahi Chatbot -->
     <div class="raahi-chatbot">
