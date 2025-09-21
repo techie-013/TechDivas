@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BlinkRide - Premium Public Transport Solution</title>
+    <title>BlinkRide - Smart Public Transport for All</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
     <style>
@@ -273,6 +273,7 @@
             position: relative;
             overflow: hidden;
             border-top: 4px solid var(--accent);
+            cursor: pointer;
         }
 
         .feature-card:before {
@@ -319,318 +320,244 @@
             z-index: 1;
         }
 
-        /* Feature Details Section */
-        .feature-details {
-            padding: 6rem 0;
-            background: linear-gradient(to right, var(--light) 50%, var(--primary) 50%);
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            overflow: auto;
+            backdrop-filter: blur(5px);
         }
 
-        .feature-detail-container {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            margin-bottom: 5rem;
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 0;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 800px;
+            position: relative;
+            animation: modalFade 0.3s;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
         }
 
-        .feature-detail-content {
-            flex: 1;
-            min-width: 300px;
-            padding: 2rem;
+        @keyframes modalFade {
+            from {opacity: 0; transform: translateY(-50px);}
+            to {opacity: 1; transform: translateY(0);}
         }
 
-        .feature-detail-content h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.2rem;
-            margin-bottom: 1.5rem;
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            color: #aaa;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        .close-modal:hover {
             color: var(--primary);
         }
 
-        .feature-detail-content p {
-            margin-bottom: 1.5rem;
-            font-size: 1.1rem;
-        }
-
-        .feature-detail-image {
-            flex: 1;
-            min-width: 300px;
-            text-align: center;
-            position: relative;
-        }
-
-        .feature-detail-image img {
-            max-width: 85%;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-        }
-
-        .feature-steps {
-            margin-top: 2rem;
-        }
-
-        .feature-step {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 1.5rem;
-        }
-
-        .step-number {
-            background: var(--accent);
+        .modal-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
-            width: 30px;
-            height: 30px;
+            padding: 1.5rem 2rem;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+        }
+
+        .modal-header h2 {
+            font-family: 'Playfair Display', serif;
+            margin: 0;
+        }
+
+        .modal-body {
+            padding: 2rem;
+        }
+
+        /* SOS Modal Specific Styles */
+        .sos-button {
+            display: block;
+            width: 200px;
+            height: 200px;
+            margin: 2rem auto;
+            background: linear-gradient(135deg, var(--danger), #c53030);
             border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            border: none;
+            color: white;
+            font-size: 1.8rem;
             font-weight: bold;
-            margin-right: 15px;
-            flex-shrink: 0;
-        }
-
-        /* How It Works */
-        .how-it-works {
-            padding: 6rem 0;
-            background-color: var(--light);
+            cursor: pointer;
+            box-shadow: 0 10px 20px rgba(229, 62, 62, 0.3);
+            transition: var(--transition);
             position: relative;
+            overflow: hidden;
         }
 
-        .how-it-works:before {
+        .sos-button:before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23f8fafc"/><path d="M0 50L100 50" stroke="%23e2e8f0" stroke-width="1"/><path d="M50 0L50 100" stroke="%23e2e8f0" stroke-width="1"/></svg>');
-            opacity: 0.5;
-            z-index: 0;
-        }
-
-        .steps {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            margin-top: 4rem;
-            position: relative;
-            z-index: 1;
-        }
-
-        .step {
-            text-align: center;
-            max-width: 250px;
-            margin: 1.5rem;
-            position: relative;
-        }
-
-        .step-number-large {
-            width: 70px;
-            height: 70px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(0);
             border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin: 0 auto 1.8rem;
-            box-shadow: 0 10px 20px rgba(26, 54, 93, 0.2);
-            position: relative;
-        }
-
-        .step-number-large:after {
-            content: '';
-            position: absolute;
-            width: 85px;
-            height: 85px;
-            border: 2px solid var(--accent);
-            border-radius: 50%;
-            opacity: 0.3;
             animation: pulse 2s infinite;
         }
 
-        @keyframes pulse {
-            0% {
-                transform: scale(0.8);
-                opacity: 0.5;
-            }
-            50% {
-                transform: scale(1.1);
-                opacity: 0.2;
-            }
-            100% {
-                transform: scale(0.8);
-                opacity: 0.5;
-            }
+        .sos-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 30px rgba(229, 62, 62, 0.4);
         }
 
-        /* Testimonials */
-        .testimonials {
-            padding: 6rem 0;
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: white;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .testimonials:before {
-            content: '';
-            position: absolute;
-            top: -100px;
-            right: -100px;
-            width: 300px;
-            height: 300px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        .testimonials:after {
-            content: '';
-            position: absolute;
-            bottom: -150px;
-            left: -150px;
-            width: 400px;
-            height: 400px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        .testimonial-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2.5rem;
-            position: relative;
-            z-index: 1;
-        }
-
-        .testimonial-card {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            padding: 2.5rem;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: var(--transition);
-        }
-
-        .testimonial-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-        }
-
-        .testimonial-text {
-            font-style: italic;
-            margin-bottom: 1.5rem;
-            position: relative;
-        }
-
-        .testimonial-text:before {
-            content: "";
-            position: absolute;
-            top: -20px;
-            left: -10px;
-            font-size: 4rem;
-            color: var(--gold);
-            opacity: 0.2;
-            font-family: Georgia, serif;
-        }
-
-        .testimonial-author {
-            display: flex;
-            align-items: center;
-        }
-
-        .author-avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--accent), var(--gold));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: 700;
-            margin-right: 1rem;
-        }
-
-        /* Raahi Chatbot Section */
-        .raahi-chatbot {
-            padding: 6rem 0;
-            background-color: var(--light);
-        }
-
-        .chatbot-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 3rem;
-            margin-top: 3rem;
-        }
-
-        .chatbot-info {
-            flex: 1;
-            min-width: 300px;
-        }
-
-        .chatbot-info h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.2rem;
-            margin-bottom: 1.5rem;
-            color: var(--primary);
-        }
-
-        .chatbot-info p {
-            margin-bottom: 1.5rem;
-            font-size: 1.1rem;
-        }
-
-        .chatbot-features {
+        .emergency-contacts {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 1.5rem;
             margin-top: 2rem;
         }
 
-        .chatbot-feature {
-            background: white;
+        .emergency-contact {
+            background: #f8fafc;
             padding: 1.5rem;
             border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: var(--transition);
+            text-align: center;
+            border-left: 4px solid var(--danger);
         }
 
-        .chatbot-feature:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-        }
-
-        .chatbot-feature i {
-            font-size: 2rem;
-            color: var(--accent);
-            margin-bottom: 1rem;
-        }
-
-        .chatbot-feature h4 {
+        .emergency-contact h3 {
             margin-bottom: 0.5rem;
             color: var(--primary);
         }
 
-        .chatbot-demo {
-            flex: 1;
-            min-width: 300px;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        /* Map Modal Styles */
+        .map-container {
+            height: 400px;
+            width: 100%;
+            border-radius: 10px;
             overflow: hidden;
+            margin: 1.5rem 0;
+            background: #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--dark);
+            font-weight: bold;
+        }
+
+        /* Bus Layout Styles */
+        .bus-layout {
             display: flex;
             flex-direction: column;
-            height: 500px;
+            align-items: center;
+            margin: 2rem 0;
+        }
+
+        .bus-driver {
+            width: 100px;
+            height: 50px;
+            background: #e2e8f0;
+            border: 2px solid #cbd5e0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        .bus-seats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        .seat {
+            width: 50px;
+            height: 50px;
+            background: var(--success);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .seat.occupied {
+            background: #e53e3e;
+            cursor: not-allowed;
+        }
+
+        .seat.selected {
+            background: var(--accent);
+            transform: scale(1.05);
+        }
+
+        .seat-info {
+            margin-top: 1rem;
+            text-align: center;
+        }
+
+        /* Raahi Chatbot Styles */
+        .raahi-chatbot {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+        }
+
+        .chatbot-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: var(--transition);
+        }
+
+        .chatbot-icon:hover {
+            transform: scale(1.1);
+        }
+
+        .chatbot-window {
+            position: absolute;
+            bottom: 70px;
+            right: 0;
+            width: 350px;
+            height: 450px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
         }
 
         .chat-header {
-            background: var(--primary);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
-            padding: 1.2rem;
+            padding: 1rem;
             display: flex;
             align-items: center;
         }
@@ -639,7 +566,7 @@
             width: 40px;
             height: 40px;
             border-radius: 50%;
-            margin-right: 12px;
+            margin-right: 10px;
             background: var(--gold);
             padding: 5px;
         }
@@ -650,19 +577,19 @@
 
         .chat-messages {
             flex: 1;
-            padding: 1.5rem;
+            padding: 1rem;
             overflow-y: auto;
             display: flex;
             flex-direction: column;
-            gap: 1rem;
+            gap: 0.8rem;
         }
 
         .message {
             max-width: 80%;
-            padding: 1rem;
+            padding: 0.8rem;
             border-radius: 15px;
             position: relative;
-            animation: fadeIn 0.3s ease;
+            animation: fadeIn 0.3s;
         }
 
         @keyframes fadeIn {
@@ -685,32 +612,31 @@
 
         .chat-input {
             display: flex;
-            padding: 1rem;
+            padding: 0.8rem;
             border-top: 1px solid #e2e8f0;
             background: white;
         }
 
         .chat-input input {
             flex: 1;
-            padding: 0.8rem 1.2rem;
+            padding: 0.8rem;
             border: 1px solid #e2e8f0;
-            border-radius: 30px;
+            border-radius: 20px;
             outline: none;
             transition: var(--transition);
         }
 
         .chat-input input:focus {
             border-color: var(--accent);
-            box-shadow: 0 0 0 2px rgba(66, 153, 225, 0.2);
         }
 
         .chat-input button {
-            margin-left: 0.8rem;
+            margin-left: 0.5rem;
             background: var(--accent);
             color: white;
             border: none;
-            width: 45px;
-            height: 45px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -721,22 +647,22 @@
 
         .chat-input button:hover {
             background: var(--primary);
-            transform: rotate(15deg);
         }
 
         .quick-replies {
             display: flex;
             flex-wrap: wrap;
             gap: 0.5rem;
-            margin-top: 1rem;
+            padding: 0.8rem;
+            border-top: 1px solid #e2e8f0;
         }
 
         .quick-reply {
             background: white;
             border: 1px solid #e2e8f0;
-            padding: 0.5rem 1rem;
+            padding: 0.5rem 0.8rem;
             border-radius: 20px;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             cursor: pointer;
             transition: var(--transition);
         }
@@ -830,16 +756,24 @@
                 font-size: 2.5rem;
             }
 
-            .feature-detail-container {
-                flex-direction: column;
-            }
-
             .hero-buttons {
                 flex-direction: column;
             }
 
-            .chatbot-container {
-                flex-direction: column;
+            .modal-content {
+                width: 95%;
+                margin: 10% auto;
+            }
+
+            .chatbot-window {
+                width: 300px;
+                height: 400px;
+                right: -20px;
+            }
+
+            .raahi-chatbot {
+                bottom: 20px;
+                right: 20px;
             }
         }
     </style>
@@ -856,7 +790,6 @@
                     <li><a href="#features">Features</a></li>
                     <li><a href="#how-it-works">How It Works</a></li>
                     <li><a href="#testimonials">Testimonials</a></li>
-                    <li><a href="#raahi-chatbot">Raahi Chatbot</a></li>
                     <li><a href="#download">Download</a></li>
                 </ul>
                 <a href="#download" class="btn">Get the App</a>
@@ -868,8 +801,8 @@
     <section class="hero">
         <div class="container">
             <div class="hero-content">
-                <h1>Revolutionizing Urban Mobility</h1>
-                <p>BlinkRide provides intelligent public transport solutions for tier-2 cities, making commuting smarter, safer, and more efficient.</p>
+                <h1>Smart Public Transport for Urban & Rural Areas</h1>
+                <p>BlinkRide provides intelligent public transport solutions for all communities, making commuting smarter, safer, and more efficient everywhere.</p>
                 <div class="hero-buttons">
                     <a href="#download" class="btn">Download App</a>
                     <a href="#features" class="btn btn-secondary">Explore Features</a>
@@ -883,35 +816,35 @@
         <div class="container">
             <div class="section-title">
                 <h2>Intelligent Features</h2>
-                <p>Our comprehensive solution addresses all aspects of urban mobility</p>
+                <p>Our comprehensive solution addresses all aspects of urban and rural mobility</p>
             </div>
             <div class="features-grid">
-                <div class="feature-card">
+                <div class="feature-card" onclick="openModal('trackingModal')">
                     <div class="feature-icon"><i class="fas fa-map-marker-alt"></i></div>
                     <h3>Real-Time Tracking</h3>
                     <p>See exactly where your bus is and get accurate arrival time predictions</p>
                 </div>
-                <div class="feature-card">
+                <div class="feature-card" onclick="openModal('smsModal')">
                     <div class="feature-icon"><i class="fas fa-sms"></i></div>
                     <h3>SMS Access</h3>
                     <p>No smartphone? No problem. Get bus info via simple SMS</p>
                 </div>
-                <div class="feature-card">
+                <div class="feature-card" onclick="openModal('sosModal')">
                     <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
                     <h3>Safety First</h3>
                     <p>Instant SOS alerts, journey sharing, and safe route recommendations</p>
                 </div>
-                <div class="feature-card">
+                <div class="feature-card" onclick="openModal('crowdModal')">
                     <div class="feature-icon"><i class="fas fa-users"></i></div>
                     <h3>Crowd Forecasting</h3>
                     <p>Know how crowded your bus will be before it arrives</p>
                 </div>
-                <div class="feature-card">
+                <div class="feature-card" onclick="openModal('multiModal')">
                     <div class="feature-icon"><i class="fas fa-route"></i></div>
                     <h3>Multi-Modal Routes</h3>
                     <p>Seamlessly combine buses, autos, and trains for the optimal journey</p>
                 </div>
-                <div class="feature-card">
+                <div class="feature-card" onclick="openModal('tripModal')">
                     <div class="feature-icon"><i class="fas fa-tasks"></i></div>
                     <h3>Trip Planner</h3>
                     <p>Plan your entire journey with accurate time and cost estimates</p>
@@ -920,226 +853,313 @@
         </div>
     </section>
 
-    <!-- Feature Details Section -->
-    <section class="feature-details">
-        <div class="container">
-            <!-- Real-Time Tracking -->
-            <div class="feature-detail-container">
-                <div class="feature-detail-content">
-                    <h3>Real-Time Tracking</h3>
-                    <p>Our advanced GPS technology provides precise location data for all public transport vehicles in real-time.</p>
-                    <div class="feature-steps">
-                        <div class="feature-step">
-                            <div class="step-number">1</div>
-                            <div>GPS devices installed on buses transmit location data every 30 seconds</div>
-                        </div>
-                        <div class="feature-step">
-                            <div class="step-number">2</div>
-                            <div>AI algorithms process this data to predict accurate arrival times</div>
-                        </div>
-                        <div class="feature-step">
-                            <div class="step-number">3</div>
-                            <div>Users see live bus locations and ETAs on interactive maps</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="feature-detail-image">
-                    <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'><rect width='400' height='300' fill='%23f1f5f9' rx='15' ry='15'/><circle cx='200' cy='150' r='100' fill='%23e2e8f0'/><path d='M150,150 L250,150' stroke='%234299e1' stroke-width='8'/><circle cx='200' cy='150' r='20' fill='%234299e1'/><text x='200' y='80' font-family='Arial' font-size='20' text-anchor='middle' fill='%231a365d'>Live Tracking Map</text></svg>" alt="Real-Time Tracking">
-                </div>
+    <!-- SOS Modal -->
+    <div id="sosModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('sosModal')">&times;</span>
+            <div class="modal-header">
+                <h2><i class="fas fa-shield-alt"></i> Emergency SOS</h2>
             </div>
-
-            <!-- SMS Access -->
-            <div class="feature-detail-container">
-                <div class="feature-detail-image">
-                    <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'><rect width='400' height='300' fill='%23f1f5f9' rx='15' ry='15'/><rect x='50' y='50' width='300' height='200' rx='10' ry='10' fill='%23e2e8f0'/><text x='200' y='100' font-family='Arial' font-size='16' text-anchor='middle' fill='%231a365d'>BUS HISAR12</text><text x='200' y='130' font-family='Arial' font-size='16' text-anchor='middle' fill='%231a365d'>Next bus: 8 mins</text><text x='200' y='160' font-family='Arial' font-size='16' text-anchor='middle' fill='%231a365d'>Route: 101A</text><text x='200' y='220' font-family='Arial' font-size='14' text-anchor='middle' fill='%234299e1'>Text 'BUS [stop code]' to 773-77-BUSHI</text></svg>" alt="SMS Access">
-                </div>
-                <div class="feature-detail-content">
-                    <h3>SMS Access</h3>
-                    <p>We ensure everyone can access transport information, regardless of smartphone ownership or internet connectivity.</p>
-                    <div class="feature-steps">
-                        <div class="feature-step">
-                            <div class="step-number">1</div>
-                            <div>User texts the bus stop code to our dedicated number</div>
-                        </div>
-                        <div class="feature-step">
-                            <div class="step-number">2</div>
-                            <div>System processes the request and fetches real-time data</div>
-                        </div>
-                        <div class="feature-step">
-                            <div class="step-number">3</div>
-                            <div>Instant reply with next bus arrivals, routes, and timings</div>
-                        </div>
+            <div class="modal-body">
+                <p style="text-align: center;">In case of emergency, press the button below to alert authorities and your emergency contacts</p>
+                
+                <button class="sos-button" onclick="triggerSOS()">SOS</button>
+                
+                <div class="emergency-contacts">
+                    <div class="emergency-contact">
+                        <h3><i class="fas fa-user"></i> Emergency Contacts</h3>
+                        <p>Your emergency contacts will be notified with your location</p>
+                        <ul style="text-align: left; margin-top: 1rem;">
+                            <li>Mom: +91 98765 43210</li>
+                            <li>Dad: +91 97654 32109</li>
+                            <li>Sister: +91 96543 21098</li>
+                        </ul>
                     </div>
-                </div>
-            </div>
-
-            <!-- Safety Features -->
-            <div class="feature-detail-container">
-                <div class="feature-detail-content">
-                    <h3>Safety First</h3>
-                    <p>Our comprehensive safety features ensure peace of mind for all passengers, especially women and vulnerable groups.</p>
-                    <div class="feature-steps">
-                        <div class="feature-step">
-                            <div class="step-number">1</div>
-                            <div>One-tap SOS button immediately alerts authorities and emergency contacts</div>
-                        </div>
-                        <div class="feature-step">
-                            <div class="step-number">2</div>
-                            <div>Live journey sharing lets family track the passenger's route in real-time</div>
-                        </div>
-                        <div class="feature-step">
-                            <div class="step-number">3</div>
-                            <div>Safe route recommendations avoid high-risk areas, especially at night</div>
-                        </div>
+                    <div class="emergency-contact">
+                        <h3><i class="fas fa-police-box"></i> Local Authorities</h3>
+                        <p>Nearby authorities will be alerted</p>
+                        <ul style="text-align: left; margin-top: 1rem;">
+                            <li>Police: 100</li>
+                            <li>Ambulance: 108</li>
+                            <li>Women's Helpline: 1091</li>
+                        </ul>
                     </div>
-                </div>
-                <div class="feature-detail-image">
-                    <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'><rect width='400' height='300' fill='%23f1f5f9' rx='15' ry='15'/><circle cx='200' cy='150' r='80' fill='%23fc8181'/><path d='M200,110 L200,190 M170,150 L230,150' stroke='white' stroke-width='10'/><text x='200' y='250' font-family='Arial' font-size='18' text-anchor='middle' fill='%231a365d'>Emergency SOS Button</text></svg>" alt="Safety Features">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- How It Works Section -->
-    <section class="how-it-works" id="how-it-works">
-        <div class="container">
-            <div class="section-title">
-                <h2>How It Works</h2>
-                <p>Getting started with smarter public transport is easy</p>
-            </div>
-            <div class="steps">
-                <div class="step">
-                    <div class="step-number-large">1</div>
-                    <h3>Download</h3>
-                    <p>Get the app from Play Store or use our SMS service</p>
-                </div>
-                <div class="step">
-                    <div class="step-number-large">2</div>
-                    <h3>Plan</h3>
-                    <p>Enter your destination and see all available options</p>
-                </div>
-                <div class="step">
-                    <div class="step-number-large">3</div>
-                    <h3>Track</h3>
-                    <p>See your bus in real-time and get accurate ETAs</p>
-                </div>
-                <div class="step">
-                    <div class="step-number-large">4</div>
-                    <h3>Travel</h3>
-                    <p>Enjoy a stress-free journey with safety features</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Testimonials Section -->
-    <section class="testimonials" id="testimonials">
-        <div class="container">
-            <div class="section-title">
-                <h2>What Users Say</h2>
-                <p>Hear from people who are already using BlinkRide</p>
-            </div>
-            <div class="testimonial-grid">
-                <div class="testimonial-card">
-                    <div class="testimonial-text">
-                        "I used to wait 30 minutes every day for my bus. Now with BlinkRide, I know exactly when to leave my home. It's a game-changer!"
-                    </div>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">R</div>
-                        <div>
-                            <h4>Rahul Sharma</h4>
-                            <p>College Student, Hisar</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial-card">
-                    <div class="testimonial-text">
-                        "The SOS feature gives me peace of mind when my daughter travels alone. I can see her journey in real-time."
-                    </div>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">P</div>
-                        <div>
-                            <h4>Priya Mehta</h4>
-                            <p>Parent</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial-card">
-                    <div class="testimonial-text">
-                        "The SMS service is brilliant! My father doesn't have a smartphone but can now check bus times easily."
-                    </div>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">A</div>
-                        <div>
-                            <h4>Ankit Verma</h4>
-                            <p>Software Engineer</p>
+                    <div class="emergency-contact">
+                        <h3><i class="fas fa-map-marker-alt"></i> Nearby Help (10-20m)</h3>
+                        <p>Other BlinkRide users nearby will be notified to assist you</p>
+                        <div style="margin-top: 1rem; height: 120px; background: #e2e8f0; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-direction: column;">
+                            <i class="fas fa-users" style="font-size: 2rem; color: var(--accent);"></i>
+                            <span style="margin-top: 10px;">5 users nearby alerted</span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 
-    <!-- Raahi Chatbot Section -->
-    <section class="raahi-chatbot" id="raahi-chatbot">
-        <div class="container">
-            <div class="section-title">
-                <h2>Raahi - Your Travel Assistant</h2>
-                <p>Our intelligent chatbot helps you with all your travel needs</p>
+    <!-- Tracking Modal -->
+    <div id="trackingModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('trackingModal')">&times;</span>
+            <div class="modal-header">
+                <h2><i class="fas fa-map-marker-alt"></i> Real-Time Tracking</h2>
             </div>
-            <div class="chatbot-container">
-                <div class="chatbot-info">
-                    <h3>Meet Raahi, Your Travel Companion</h3>
-                    <p>Raahi is an AI-powered chatbot designed to make your travel experience seamless. From real-time information to customer support, Raahi is here to help 24/7.</p>
-                    
-                    <div class="chatbot-features">
-                        <div class="chatbot-feature">
-                            <i class="fas fa-cloud-sun"></i>
-                            <h4>Live Weather Updates</h4>
-                            <p>Get current weather conditions for your location or destination</p>
-                        </div>
-                        <div class="chatbot-feature">
-                            <i class="fas fa-map-marked-alt"></i>
-                            <h4>Tourist Information</h4>
-                            <p>Discover local attractions and points of interest</p>
-                        </div>
-                        <div class="chatbot-feature">
-                            <i class="fas fa-shield-alt"></i>
-                            <h4>Safety Information</h4>
-                            <p>Access crime and safety data for any location</p>
-                        </div>
-                        <div class="chatbot-feature">
-                            <i class="fas fa-headset"></i>
-                            <h4>Customer Support</h4>
-                            <p>Report issues, get help, and track your complaints</p>
-                        </div>
+            <div class="modal-body">
+                <p>Track your bus in real-time with our integrated Google Maps system</p>
+                
+                <div class="map-container">
+                    <div style="text-align: center;">
+                        <i class="fas fa-map-marked-alt" style="font-size: 3rem; color: var(--accent); margin-bottom: 1rem;"></i>
+                        <p>Google Maps Integration</p>
+                        <p>Live bus locations and routes</p>
+                        <button class="btn" style="margin-top: 1rem;" onclick="showLiveMap()">View Live Map</button>
                     </div>
                 </div>
                 
-                <div class="chatbot-demo">
-                    <div class="chat-header">
-                        <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='50' fill='%23d4af37'/><text x='50' y='65' font-family='Arial' font-size='40' text-anchor='middle' fill='white'>R</text></svg>" alt="Raahi">
-                        <h3>Raahi Assistant</h3>
+                <div style="display: flex; justify-content: space-between; flex-wrap: wrap; margin-top: 2rem;">
+                    <div style="flex: 1; min-width: 250px; padding: 1rem;">
+                        <h3><i class="fas fa-bus"></i> Bus #HIS102</h3>
+                        <p>Route: 12A - Central Station to City Mall</p>
+                        <p>Next Stop: Central Park (ETA: 8 min)</p>
+                        <p>Distance: 1.2 km away</p>
                     </div>
-                    <div class="chat-messages" id="chat-messages">
-                        <div class="message bot-message">
-                            Hi there! I'm Raahi, your travel assistant. How can I help you today?
-                        </div>
-                    </div>
-                    <div class="chat-input">
-                        <input type="text" id="user-input" placeholder="Type your message here...">
-                        <button id="send-button"><i class="fas fa-paper-plane"></i></button>
-                    </div>
-                    <div class="quick-replies">
-                        <div class="quick-reply" data-message="Weather update">Weather</div>
-                        <div class="quick-reply" data-message="Tourist places">Attractions</div>
-                        <div class="quick-reply" data-message="Safety information">Safety</div>
-                        <div class="quick-reply" data-message="File a complaint">Complaint</div>
+                    <div style="flex: 1; min-width: 250px; padding: 1rem;">
+                        <h3><i class="fas fa-road"></i> Route Info</h3>
+                        <p>Total Stops: 15</p>
+                        <p>Current Speed: 30 km/h</p>
+                        <p>Arrival Time: 8:15 AM</p>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+
+    <!-- Crowd Forecasting Modal -->
+    <div id="crowdModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('crowdModal')">&times;</span>
+            <div class="modal-header">
+                <h2><i class="fas fa-users"></i> Crowd Forecasting</h2>
+            </div>
+            <div class="modal-body">
+                <p style="text-align: center;">Check how crowded your bus is before boarding</p>
+                
+                <div class="bus-layout">
+                    <div class="bus-driver">Driver</div>
+                    <div class="bus-seats">
+                        <div class="seat">1</div>
+                        <div class="seat occupied">2</div>
+                        <div class="seat">3</div>
+                        <div class="seat occupied">4</div>
+                        <div class="seat">5</div>
+                        <div class="seat occupied">6</div>
+                        <div class="seat">7</div>
+                        <div class="seat">8</div>
+                        <div class="seat occupied">9</div>
+                        <div class="seat">10</div>
+                        <div class="seat occupied">11</div>
+                        <div class="seat">12</div>
+                    </div>
+                    <div class="seat-info">
+                        <p><span style="display: inline-block; width: 15px; height: 15px; background: var(--success); border-radius: 3px;"></span> Available: 7 seats</p>
+                        <p><span style="display: inline-block; width: 15px; height: 15px; background: #e53e3e; border-radius: 3px;"></span> Occupied: 5 seats</p>
+                    </div>
+                </div>
+                
+                <div style="background: #f8fafc; padding: 1.5rem; border-radius: 10px; margin-top: 2rem;">
+                    <h3><i class="fas fa-chart-line"></i> Crowd Prediction</h3>
+                    <p>Based on historical data and current bookings, this bus is expected to be:</p>
+                    <div style="display: flex; align-items: center; margin-top: 1rem;">
+                        <div style="width: 100%; height: 20px; background: #e2e8f0; border-radius: 10px; overflow: hidden;">
+                            <div style="width: 60%; height: 100%; background: var(--accent);"></div>
+                        </div>
+                        <span style="margin-left: 1rem; font-weight: bold;">60% Full</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Multi-Modal Routes Modal -->
+    <div id="multiModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('multiModal')">&times;</span>
+            <div class="modal-header">
+                <h2><i class="fas fa-route"></i> Multi-Modal Routes</h2>
+            </div>
+            <div class="modal-body">
+                <p style="text-align: center;">Plan journeys combining different transport modes</p>
+                
+                <div style="display: flex; flex-wrap: wrap; gap: 1rem; margin: 2rem 0;">
+                    <div style="flex: 1; min-width: 200px; background: #f8fafc; padding: 1.5rem; border-radius: 10px; text-align: center;">
+                        <i class="fas fa-bus" style="font-size: 2rem; color: var(--accent); margin-bottom: 1rem;"></i>
+                        <h3>Bus</h3>
+                        <p>Route 12A: 15 mins</p>
+                        <p>Cost: ₹25</p>
+                    </div>
+                    <div style="flex: 1; min-width: 200px; background: #f8fafc; padding: 1.5rem; border-radius: 10px; text-align: center;">
+                        <i class="fas fa-subway" style="font-size: 2rem; color: var(--accent); margin-bottom: 1rem;"></i>
+                        <h3>Metro</h3>
+                        <p>Blue Line: 8 mins</p>
+                        <p>Cost: ₹30</p>
+                    </div>
+                    <div style="flex: 1; min-width: 200px; background: #f8fafc; padding: 1.5rem; border-radius: 10px; text-align: center;">
+                        <i class="fas fa-walking" style="font-size: 2rem; color: var(--accent); margin-bottom: 1rem;"></i>
+                        <h3>Walking</h3>
+                        <p>Distance: 0.5 km</p>
+                        <p>Time: 6 mins</p>
+                    </div>
+                </div>
+                
+                <div style="background: #f1f5f9; padding: 1.5rem; border-radius: 10px; margin-top: 2rem;">
+                    <h3><i class="fas fa-route"></i> Recommended Route</h3>
+                    <ol style="margin-left: 1.5rem; margin-top: 1rem;">
+                        <li>Take Bus #HIS102 from Central Station to City Mall (15 mins)</li>
+                        <li>Walk to Metro Station (6 mins)</li>
+                        <li>Take Blue Line Metro from City Mall to Downtown (8 mins)</li>
+                        <li>Walk to destination (3 mins)</li>
+                    </ol>
+                    <div style="display: flex; justify-content: space-between; margin-top: 1rem;">
+                        <div><strong>Total Time:</strong> 32 mins</div>
+                        <div><strong>Total Cost:</strong> ₹55</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Trip Planner Modal -->
+    <div id="tripModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('tripModal')">&times;</span>
+            <div class="modal-header">
+                <h2><i class="fas fa-tasks"></i> Trip Planner</h2>
+            </div>
+            <div class="modal-body">
+                <p style="text-align: center;">Plan your complete journey with accurate time and cost estimates</p>
+                
+                <div style="display: flex; flex-wrap: wrap; gap: 1rem; margin: 2rem 0;">
+                    <div style="flex: 1; min-width: 250px;">
+                        <h3><i class="fas fa-map-pin"></i> From</h3>
+                        <input type="text" placeholder="Starting point" style="width: 100%; padding: 0.8rem; border: 1px solid #e2e8f0; border-radius: 8px; margin-top: 0.5rem;">
+                    </div>
+                    <div style="flex: 1; min-width: 250px;">
+                        <h3><i class="fas fa-map-marker-alt"></i> To</h3>
+                        <input type="text" placeholder="Destination" style="width: 100%; padding: 0.8rem; border: 1px solid #e2e8f0; border-radius: 8px; margin-top: 0.5rem;">
+                    </div>
+                </div>
+                
+                <button class="btn" style="width: 100%; margin: 1rem 0;" onclick="planTrip()">Plan My Trip</button>
+                
+                <div id="tripResults" style="display: none;">
+                    <div style="background: #f8fafc; padding: 1.5rem; border-radius: 10px; margin-top: 2rem;">
+                        <h3><i class="fas fa-route"></i> Recommended Route</h3>
+                        <ol style="margin-left: 1.5rem; margin-top: 1rem;">
+                            <li>Walk to Central Station (5 mins)</li>
+                            <li>Take Bus #HIS102 to City Mall (15 mins)</li>
+                            <li>Transfer to Bus #HIS204 to Downtown (10 mins)</li>
+                            <li>Walk to destination (3 mins)</li>
+                        </ol>
+                        <div style="display: flex; justify-content: space-between; margin-top: 1rem;">
+                            <div><strong>Total Time:</strong> 33 mins</div>
+                            <div><strong>Total Cost:</strong> ₹40</div>
+                        </div>
+                    </div>
+                    
+                    <div style="display: flex; justify-content: space-between; margin-top: 2rem;">
+                        <div style="flex: 1; text-align: center;">
+                            <i class="fas fa-clock" style="font-size: 2rem; color: var(--accent);"></i>
+                            <p>Depart: 8:00 AM</p>
+                            <p>Arrive: 8:33 AM</p>
+                        </div>
+                        <div style="flex: 1; text-align: center;">
+                            <i class="fas fa-money-bill-wave" style="font-size: 2rem; color: var(--accent);"></i>
+                            <p>Cost: ₹40</p>
+                            <p>Savings: ₹15 vs Auto</p>
+                        </div>
+                        <div style="flex: 1; text-align: center;">
+                            <i class="fas fa-leaf" style="font-size: 2rem; color: var(--accent);"></i>
+                            <p>Carbon Saved: 2.3kg</p>
+                            <p>Eco-friendly</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SMS Modal -->
+    <div id="smsModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('smsModal')">&times;</span>
+            <div class="modal-header">
+                <h2><i class="fas fa-sms"></i> SMS Access</h2>
+            </div>
+            <div class="modal-body">
+                <p style="text-align: center;">Access bus information without a smartphone or internet connection</p>
+                
+                <div class="sms-demo">
+                    <div class="sms-header">
+                        <i class="fas fa-comment-sms"></i>
+                        <h3>Text Message</h3>
+                    </div>
+                    <div class="sms-content">
+                        <p><strong>To:</strong> 773-77-BUSHI</p>
+                        <p><strong>Message:</strong> BUS HISAR12</p>
+                        <hr style="margin: 10px 0;">
+                        <p><strong>Reply:</strong> Bus #HIS102 (Route 12A) arriving in 8 mins. Next bus: 15 mins.</p>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 2rem;">
+                    <h3>How it works:</h3>
+                    <ol style="margin-left: 1.5rem; margin-top: 1rem;">
+                        <li>Text "BUS [stop code]" to 773-77-BUSHI</li>
+                        <li>Receive real-time arrival information</li>
+                        <li>Get route details and next bus timings</li>
+                    </ol>
+                </div>
+                
+                <div style="background: #f1f5f9; padding: 1.5rem; border-radius: 10px; margin-top: 2rem;">
+                    <h3><i class="fas fa-info-circle"></i> Popular Stop Codes:</h3>
+                    <ul style="columns: 2; margin-top: 1rem;">
+                        <li>HISAR12 - Central Station</li>
+                        <li>HISAR23 - City Mall</li>
+                        <li>HISAR07 - University Gate</li>
+                        <li>HISAR45 - Medical College</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Raahi Chatbot -->
+    <div class="raahi-chatbot">
+        <div class="chatbot-icon" onclick="toggleChatbot()">
+            <i class="fas fa-robot"></i>
+        </div>
+        <div class="chatbot-window" id="chatbotWindow">
+            <div class="chat-header">
+                <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='50' fill='%23d4af37'/><text x='50' y='65' font-family='Arial' font-size='40' text-anchor='middle' fill='white'>R</text></svg>" alt="Raahi">
+                <h3>Raahi Assistant</h3>
+            </div>
+            <div class="chat-messages" id="chatMessages">
+                <div class="message bot-message">
+                    Hi there! I'm Raahi, your travel assistant. How can I help you today?
+                </div>
+            </div>
+            <div class="chat-input">
+                <input type="text" id="userInput" placeholder="Type your message here...">
+                <button onclick="sendMessage()"><i class="fas fa-paper-plane"></i></button>
+            </div>
+            <div class="quick-replies">
+                <div class="quick-reply" onclick="quickReply('Weather update')">Weather</div>
+                <div class="quick-reply" onclick="quickReply('Tourist places')">Attractions</div>
+                <div class="quick-reply" onclick="quickReply('Safety information')">Safety</div>
+                <div class="quick-reply" onclick="quickReply('File a complaint')">Complaint</div>
+            </div>
+        </div>
+    </div>
 
     <!-- Download Section -->
     <section class="download" id="download" style="padding: 6rem 0; text-align: center; background: var(--light);">
@@ -1168,7 +1188,7 @@
             <div class="footer-content">
                 <div class="footer-section">
                     <h3>BlinkRide</h3>
-                    <p>Making public transport smart, safe, and accessible for tier-2 cities across India.</p>
+                    <p>Making public transport smart, safe, and accessible for urban and rural areas across India.</p>
                 </div>
                 <div class="footer-section">
                     <h3>Quick Links</h3>
@@ -1176,7 +1196,6 @@
                         <li><a href="#features"><i class="fas fa-arrow-right"></i> Features</a></li>
                         <li><a href="#how-it-works"><i class="fas fa-arrow-right"></i> How It Works</a></li>
                         <li><a href="#testimonials"><i class="fas fa-arrow-right"></i> Testimonials</a></li>
-                        <li><a href="#raahi-chatbot"><i class="fas fa-arrow-right"></i> Raahi Chatbot</a></li>
                         <li><a href="#download"><i class="fas fa-arrow-right"></i> Download</a></li>
                     </ul>
                 </div>
@@ -1216,14 +1235,77 @@
             }
         });
 
-        // Raahi Chatbot functionality
-        const chatMessages = document.getElementById('chat-messages');
-        const userInput = document.getElementById('user-input');
-        const sendButton = document.getElementById('send-button');
-        const quickReplies = document.querySelectorAll('.quick-reply');
+        // Modal functionality
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
 
-        // Function to add a message to the chat
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        // SOS functionality
+        function triggerSOS() {
+            const sosButton = document.querySelector('.sos-button');
+            sosButton.innerHTML = '<i class="fas fa-exclamation-triangle"></i> ALERT SENT';
+            sosButton.style.background = 'linear-gradient(135deg, #38a169, #2f855a)';
+            sosButton.style.boxShadow = '0 10px 20px rgba(56, 161, 105, 0.3)';
+            
+            // Simulate sending alerts
+            setTimeout(() => {
+                alert('Emergency alert sent to authorities, your emergency contacts, and 5 nearby BlinkRide users! Your location is being shared.');
+            }, 1000);
+        }
+
+        // Show live map
+        function showLiveMap() {
+            alert('Opening live Google Maps integration with real-time bus locations...');
+        }
+
+        // Plan trip
+        function planTrip() {
+            document.getElementById('tripResults').style.display = 'block';
+        }
+
+        // Raahi Chatbot functionality
+        function toggleChatbot() {
+            const chatbotWindow = document.getElementById('chatbotWindow');
+            chatbotWindow.style.display = chatbotWindow.style.display === 'flex' ? 'none' : 'flex';
+        }
+
+        function sendMessage() {
+            const userInput = document.getElementById('userInput');
+            const message = userInput.value.trim();
+            
+            if (message) {
+                addMessage(message, true);
+                userInput.value = '';
+                
+                // Simulate typing delay
+                setTimeout(() => {
+                    const response = generateBotResponse(message);
+                    addMessage(response);
+                }, 1000);
+            }
+        }
+
+        function quickReply(message) {
+            document.getElementById('userInput').value = message;
+            sendMessage();
+        }
+
         function addMessage(message, isUser = false) {
+            const chatMessages = document.getElementById('chatMessages');
             const messageDiv = document.createElement('div');
             messageDiv.classList.add('message');
             messageDiv.classList.add(isUser ? 'user-message' : 'bot-message');
@@ -1232,7 +1314,6 @@
             chatMessages.scrollTop = chatMessages.scrollHeight;
         }
 
-        // Function to generate bot response
         function generateBotResponse(userMessage) {
             userMessage = userMessage.toLowerCase();
             
@@ -1254,37 +1335,6 @@
                 return "I'm sorry, I didn't understand that. I can help with weather updates, tourist information, safety details, bus tracking, or filing complaints. What do you need help with?";
             }
         }
-
-        // Event listener for send button
-        sendButton.addEventListener('click', function() {
-            const message = userInput.value.trim();
-            if (message) {
-                addMessage(message, true);
-                userInput.value = '';
-                
-                // Simulate typing delay
-                setTimeout(() => {
-                    const response = generateBotResponse(message);
-                    addMessage(response);
-                }, 1000);
-            }
-        });
-
-        // Event listener for Enter key
-        userInput.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                sendButton.click();
-            }
-        });
-
-        // Event listeners for quick replies
-        quickReplies.forEach(reply => {
-            reply.addEventListener('click', function() {
-                const message = this.getAttribute('data-message');
-                userInput.value = message;
-                sendButton.click();
-            });
-        });
     </script>
 </body>
 </html>
